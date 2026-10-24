@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440">
+  <rect width="800" height="440" rx="28" fill="#e6dcff"/>
+  <g fill="#19233a"><ellipse cx="190" cy="330" rx="100" ry="35"/><ellipse cx="400" cy="330" rx="100" ry="35"/><ellipse cx="610" cy="330" rx="100" ry="35"/></g>
+  <g stroke="#19233a" stroke-width="8"><circle cx="190" cy="220" r="70" fill="#ff856e"/><circle cx="400" cy="185" r="70" fill="#d8f36b"/><circle cx="610" cy="235" r="70" fill="#bddcff"/></g>
+  <g fill="#19233a"><circle cx="168" cy="210" r="8"/><circle cx="212" cy="210" r="8"/><path d="M165 242q25 22 50 0" fill="none" stroke="#19233a" stroke-width="8"/><circle cx="378" cy="175" r="8"/><circle cx="422" cy="175" r="8"/><circle cx="588" cy="225" r="8"/><circle cx="632" cy="225" r="8"/></g>
+  <text x="400" y="72" fill="#19233a" font-family="Arial" font-size="38" font-weight="900" text-anchor="middle">WHACK!</text>
+</svg>
+
