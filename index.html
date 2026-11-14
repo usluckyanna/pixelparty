@@ -1,56 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The Snack Shack — bright, satisfying student lunches and snacks at friendly prices.">
-  <title>The Snack Shack · Student Lunch Club</title>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Break Mode 离线学生游戏中心：没有网络也能玩的贪吃蛇、井字棋和恐龙奔跑。">
+  <title>Break Mode · 离线学生游戏中心</title>
   <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="#top" aria-label="The Snack Shack home"><span class="brand-mark">SS</span><span><strong>The Snack</strong><em>Shack</em></span></a>
-    <nav aria-label="Main navigation"><a href="#menu">Menu</a><a href="#pickup">Pickup</a><a href="#about">About us</a></nav>
-    <a class="order-link" href="#menu">Order now <span>↗</span></a>
-  </header>
-
+  <header class="header"><a class="brand" href="#top"><span>✦</span>BREAK<em>MODE</em></a><nav><a href="#games">游戏</a><a href="#why">为什么</a><a href="#offline">离线说明</a></nav><span class="offline"><i></i>无需网络</span></header>
   <main id="top">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-copy"><p class="eyebrow">Student lunch club · Open today</p><h1 id="hero-title">Good food.<br><em>Good mood.</em></h1><a class="button button-dark hero-menu-button" href="#menu">See today’s menu <span>↓</span></a><p class="hero-intro">The Snack Shack serves warm lunch bites, sweet snacks, and cold drinks at student-friendly prices in Room 214.</p></div>
-      <div class="hero-card"><div class="hero-photo"><img src="waffles.jpg" alt="Golden Hong Kong egg waffles ready to share"><span class="sticker">Made<br>with joy</span></div><div class="hero-card-caption"><strong>Lunch made easy</strong><span>Fresh picks · Friendly prices</span></div></div>
-    </section>
-
-    <section class="menu-section" id="menu" aria-labelledby="menu-title"><div class="section-heading"><div><p class="eyebrow">What’s cooking</p><h2 id="menu-title">Today’s menu</h2></div><p class="section-note">Tap “Buy” to reserve your pick.</p></div>
-      <div class="category-label"><span class="category-icon">★</span><h3>Hot picks</h3><span class="category-line"></span><span class="category-tag">Most loved</span></div>
-      <div class="menu-grid">
-        <article class="menu-card"><div class="menu-image"><img src="roast-duck.webp" alt="Sliced roast duck with crisp golden skin"><span class="menu-badge">Best seller</span></div><div class="menu-info"><h4>Roast Duck Rice Bowl</h4><strong>$8.50</strong></div><p>Glazed roast duck, jasmine rice, and greens.</p><button class="buy-button" type="button" data-item="Roast Duck Rice Bowl" data-price="8.50">Add to order <span>+</span></button></article>
-        <article class="menu-card"><div class="menu-image"><img src="baozi.webp" alt="Steamed white baozi in a bamboo basket"></div><div class="menu-info"><h4>Steamed Baozi</h4><strong>$5.00</strong></div><p>Soft steamed buns with a savory filling.</p><button class="buy-button" type="button" data-item="Steamed Baozi" data-price="5.00">Add to order <span>+</span></button></article>
-      </div>
-      <div class="category-label"><span class="category-icon">♥</span><h3>Packaged favorites</h3><span class="category-line"></span><span class="category-tag">Grab & go</span></div>
-      <div class="menu-grid">
-        <article class="menu-card"><div class="menu-image packaged-image"><img src="doritos.png" alt="Blue bag of Doritos Cool Ranch tortilla chips"></div><div class="menu-info"><h4>Doritos Cool Ranch</h4><strong>$2.00</strong></div><p>Crunchy, cool, and ready for your study break.</p><button class="buy-button" type="button" data-item="Doritos Cool Ranch" data-price="2.00">Add to order <span>+</span></button></article>
-        <article class="menu-card"><div class="menu-image packaged-image"><img src="hot_cheeto.png" alt="Orange bag of Flamin’ Hot Cheetos Crunchy snacks"></div><div class="menu-info"><h4>Flamin’ Hot Cheetos</h4><strong>$2.00</strong></div><p>Extra cheesy crunch with a spicy kick.</p><button class="buy-button" type="button" data-item="Flamin’ Hot Cheetos" data-price="2.00">Add to order <span>+</span></button></article>
-        <article class="menu-card"><div class="menu-image packaged-image"><img src="sour_patch_kids.png" alt="Yellow box of Sour Patch Kids soft and chewy candy"></div><div class="menu-info"><h4>Sour Patch Kids</h4><strong>$2.25</strong></div><p>Sour first, sweet later — a classic treat.</p><button class="buy-button" type="button" data-item="Sour Patch Kids" data-price="2.25">Add to order <span>+</span></button></article>
-        <article class="menu-card"><div class="menu-image packaged-image"><img src="takis.png" alt="Purple bag of Takis Fuego rolled tortilla chips"></div><div class="menu-info"><h4>Takis Fuego</h4><strong>$2.25</strong></div><p>Bold chili-lime flavor for serious snackers.</p><button class="buy-button" type="button" data-item="Takis Fuego" data-price="2.25">Add to order <span>+</span></button></article>
-      </div>
-      <div class="category-label"><span class="category-icon">✦</span><h3>Signature snacks</h3><span class="category-line"></span><span class="category-tag">Made for sharing</span></div>
-      <div class="menu-grid">
-        <article class="menu-card"><div class="menu-image"><img src="waffles.jpg" alt="Golden Hong Kong egg waffles on a cooling rack"></div><div class="menu-info"><h4>Hong Kong Egg Waffles</h4><strong>$4.50</strong></div><p>Warm bubble waffles with honey drizzle.</p><button class="buy-button" type="button" data-item="Hong Kong Egg Waffles" data-price="4.50">Add to order <span>+</span></button></article>
-        <article class="menu-card"><div class="menu-image"><img src="roast-duck.webp" alt="A chef's special Chinese comfort food plate"></div><div class="menu-info"><h4>Snack Shack Platter</h4><strong>$6.50</strong></div><p>A little bit of everything, perfect for friends.</p><button class="buy-button" type="button" data-item="Snack Shack Platter" data-price="6.50">Add to order <span>+</span></button></article>
-      </div>
-      <div class="category-label"><span class="category-icon">☼</span><h3>Cold drinks</h3><span class="category-line"></span><span class="category-tag">Cool down</span></div>
-      <div class="menu-grid">
-        <article class="menu-card"><div class="menu-image illustrated-drink citrus-drink" role="img" aria-label="Illustration of a citrus iced tea"><span>🍋</span></div><div class="menu-info"><h4>Citrus Iced Tea</h4><strong>$3.00</strong></div><p>Bright black tea with lemon and orange.</p><button class="buy-button" type="button" data-item="Citrus Iced Tea" data-price="3.00">Add to order <span>+</span></button></article>
-        <article class="menu-card"><div class="menu-image illustrated-drink milk-drink" role="img" aria-label="Illustration of a brown sugar milk tea"><span>🧋</span></div><div class="menu-info"><h4>Brown Sugar Milk Tea</h4><strong>$4.00</strong></div><p>Creamy, chilled, and lightly sweet.</p><button class="buy-button" type="button" data-item="Brown Sugar Milk Tea" data-price="4.00">Add to order <span>+</span></button></article>
-      </div>
-      <div class="pickup-banner" id="pickup"><div class="pickup-icon">✦</div><div><span class="eyebrow">Easy pickup</span><strong>Pick up at Room 214, 12:15–12:45 PM.</strong></div><a class="button button-light" href="#order">View your order <span>↓</span></a></div>
-      <section class="order-panel" id="order" aria-labelledby="order-title"><div class="order-header"><div><p class="eyebrow">Your order</p><h3 id="order-title">Ready when you are.</h3></div><button class="text-button" id="clear-order" type="button">Clear order</button></div><ul class="order-list" id="order-list"><li class="empty-order">No items yet — choose something from the menu above.</li></ul><div class="order-total"><span>Total</span><strong id="order-total">$0.00</strong></div><button class="button button-dark print-button" id="print-order" type="button">Print order <span>↗</span></button><p class="order-status" id="order-status" aria-live="polite"></p></section>
-    </section>
-
-    <section class="about-section" id="about" aria-labelledby="about-title"><div class="about-label"><p class="eyebrow">The story</p><span>SS / 01</span></div><div class="about-copy"><h2 id="about-title">A little <em>joy</em> between classes.</h2><p>The Snack Shack is a student-run lunch club created by Mia, built around simple food, fair prices, and a friendly place to recharge. We keep the menu small, the flavors big, and the line moving.</p><div class="about-points"><span><b>01</b> Fresh today</span><span><b>02</b> Student priced</span><span><b>03</b> Made to share</span></div></div></section>
-  </main>
-
-  <footer class="site-footer"><span>© 2024 The Snack Shack</span><div><a href="#menu">Menu</a><a href="#pickup">Pickup info</a><a href="#top">Back to top ↑</a></div></footer>
-  <script src="script.js"></script>
-</body>
-</html>
+    <section class="hero"><div><p class="eyebrow">STUDENT GAME CENTER · 100% OFFLINE</p><h1>学习很重要，<br><em>休息也一样。</em></h1><p class="intro">这是一个为学生准备的离线小游戏中心：不需要网络，打开浏览器就能快速放松几分钟。</p><a class="cta" href="#games">选择一个游戏 <span>↓</span></a></div><div class="hero-art" aria-label="游戏手柄和星星插画"><div class="console">●<b>✦</b>●</div><strong>NO WI-FI.<br><em>NO PROBLEM.</em></strong><span class="star">✦</span></div></section>
+    <section class="games" id="games"><div class="section-head"><div><p class="eyebrow">PICK YOUR BREAK</p><h2>现在想玩什么？</h2></div><p>点击卡片即可开始<br>不需要下载。</p></div><div class="game-grid"><a class="game-card snake-card" href="#snake"><b>01</b><div class="card-art">● ● ●<strong>✦</strong></div><h3>贪吃蛇</h3><p>吃掉食物，越长越强。</p><span>开始玩 ↗</span></a><a class="game-card tic-card" href="#tic-tac-toe"><b>02</b><div class="card-art">×　○<br>○　×</div><h3>井字棋</h3><p>和朋友轮流来一局。</p><span>开始玩 ↗</span></a><a class="game-card dino-card" href="#dino"><b>03</b><div class="card-art">▰　♣　☁</div><h3>恐龙奔跑</h3><p>跳过障碍，跑得更远。</p><span>开始玩 ↗</span></a></div></section>
+    <section class="play snake-play" id="snake"><div class="play-head"><div><p class="eyebrow">GAME 01 · ENDLESS</p><h2>贪吃蛇</h2><p>使用方向键或屏幕按钮移动，吃到星星就会变长。</p></div><div class="score"><small>得分</small><strong id="snake-score">0</strong></div></div><div class="canvas-wrap"><canvas id="snake-canvas" width="480" height="360" aria-label="贪吃蛇游戏区域"></canvas><div class="pad"><button data-dir="up">↑</button><div><button data-dir="left">←</button><button data-dir="down">↓</button><button data-dir="right">→</button></div></div></div><div class="actions"><button class="button" id="snake-start">开始游戏</button><button class="button secondary" id="snake-reset">重新开始</button><span id="snake-status" role="status">准备好了吗？</span></div></section>
+    <section class="play tic-play" id="tic-tac-toe"><div class="play-head"><div><p class="eyebrow">GAME 02 · TWO PLAYERS</p><h2>井字棋</h2><p>轮流点击格子，先连成三格的人获胜。</p></div><div class="score"><small>回合</small><strong id="tic-turn">X</strong></div></div><div class="tic-board" id="tic-board" role="grid" aria-label="井字棋棋盘"></div><div class="actions"><button class="button" id="tic-reset">再来一局</button><span id="tic-status" role="status">X 先走。</span></div></section>
+    <section class="play dino-play" id="dino"><div class="play-head"><div><p class="eyebrow">GAME 03 · ONE BUTTON</p><h2>恐龙奔跑</h2><p>按空格键、↑，或点击跳跃按钮躲开障碍。</p></div><div class="score"><small>距离</small><strong id="dino-score">0</strong></div></div><div class="canvas-wrap"><canvas id="dino-canvas" width="720" height="260" aria-label="恐龙奔跑游戏区域"></canvas></div><div class="actions"><button class="button" id="dino-start">开始奔跑</button><button class="button secondary" id="dino-jump">跳跃</button><span id="dino-status" role="status">准备起跑。</span></div></section>
+    <section class="why" id="why"><p class="eyebrow">WHY BREAK MODE?</p><h2>给大脑一个<br><em>短暂的重启。</em></h2><div class="why-grid"><div><b>01</b><h3>打开即玩</h3><p>从首页卡片进入游戏，不需要下载或注册。</p></div><div><b>02</b><h3>完全离线</h3><p>代码都在本地运行，断网也不影响游戏。</p></div><div><b>03</b><h3>适合课间</h3><p>几分钟一局，放松之后随时回到学习状态。</p></div></div></section>
+    <section class="offline" id="offline"><p class="eyebrow">BUILT FOR NO SIGNAL</p><h2>没有 Wi-Fi？<br><em>正好。</em></h2><p>Break Mode 不连接服务器、不使用账号、不加载外部资源。每次刷新都会从新的游戏状态开始。</p><a class="button secondary" href="#games">回到游戏列表 ↑</a></section>
+  </main><footer><span>© Break Mode</span><span>纯静态 · 本地运行 · GitHub Pages ready</span></footer><script src="script.js"></script>
+</body></html>
