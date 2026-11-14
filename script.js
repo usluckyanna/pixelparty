@@ -1,82 +1,27 @@
-<<<<<<< ours
-const order = [];
-const orderList = document.querySelector('#order-list');
-const orderTotal = document.querySelector('#order-total');
-const orderStatus = document.querySelector('#order-status');
-const clearOrderButton = document.querySelector('#clear-order');
-const printOrderButton = document.querySelector('#print-order');
+const $=s=>document.querySelector(s);
+// Game state intentionally lives only in memory, so every refresh starts fresh.
 
-function renderOrder() {
-  orderList.innerHTML = '';
-  if (order.length === 0) {
-    orderList.innerHTML = '<li class="empty-order">No items yet — choose something from the menu above.</li>';
-  } else {
-    order.forEach((item, index) => {
-      const row = document.createElement('li');
-      row.className = 'order-item';
-      row.innerHTML = `<span>${item.name}</span><strong>$${item.price.toFixed(2)}</strong><button type="button" aria-label="Remove ${item.name}" data-remove="${index}">×</button>`;
-      orderList.appendChild(row);
-    });
-  }
+// Snake
+const snakeCanvas=$('#snake-canvas'),snakeCtx=snakeCanvas.getContext('2d');
+let snake=[],food={},dir={x:1,y:0},nextDir={x:1,y:0},snakeScore=0,snakeTimer=null;
+function placeFood(){do{food={x:Math.floor(Math.random()*20),y:Math.floor(Math.random()*15)}}while(snake.some(p=>p.x===food.x&&p.y===food.y));}
+function drawSnake(){snakeCtx.fillStyle='#fffaf0';snakeCtx.fillRect(0,0,480,360);snakeCtx.fillStyle='#ff856e';snakeCtx.beginPath();snakeCtx.arc(food.x*24+12,food.y*24+12,8,0,Math.PI*2);snakeCtx.fill();snake.forEach((p,i)=>{snakeCtx.fillStyle=i?'#53627f':'#19233a';snakeCtx.beginPath();snakeCtx.arc(p.x*24+12,p.y*24+12,10,0,Math.PI*2);snakeCtx.fill();});}
+function resetSnake(){clearInterval(snakeTimer);snake=[{x:10,y:7},{x:9,y:7},{x:8,y:7}];dir={x:1,y:0};nextDir={x:1,y:0};snakeScore=0;$('#snake-score').textContent='0';$('#snake-status').textContent='准备好了吗？';placeFood();drawSnake();}
+function moveSnake(){dir=nextDir;const head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};if(head.x<0||head.x>=20||head.y<0||head.y>=15||snake.some(p=>p.x===head.x&&p.y===head.y)){clearInterval(snakeTimer);$('#snake-status').textContent=`游戏结束！得分 ${snakeScore}。`;return;}snake.unshift(head);if(head.x===food.x&&head.y===food.y){snakeScore++;$('#snake-score').textContent=snakeScore;placeFood();}else snake.pop();drawSnake();}
+function startSnake(){resetSnake();$('#snake-status').textContent='游戏进行中！';snakeTimer=setInterval(moveSnake,135);}
+function setDirection(name){const map={up:{x:0,y:-1},down:{x:0,y:1},left:{x:-1,y:0},right:{x:1,y:0}},n=map[name];if(n&&!(n.x===-dir.x&&n.y===-dir.y))nextDir=n;}
+document.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>setDirection(b.dataset.dir)));document.addEventListener('keydown',e=>{const keys={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right'};if(keys[e.key]){e.preventDefault();setDirection(keys[e.key]);}});$('#snake-start').addEventListener('click',startSnake);$('#snake-reset').addEventListener('click',resetSnake);resetSnake();
 
-  const total = order.reduce((sum, item) => sum + item.price, 0);
-  orderTotal.textContent = `$${total.toFixed(2)}`;
-}
+// Tic-tac-toe
+const ticBoard=$('#tic-board');let cells=Array(9).fill(''),player='X',ticOver=false;const wins=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+function renderTic(){ticBoard.innerHTML='';cells.forEach((value,i)=>{const b=document.createElement('button');b.className='tic-cell';b.type='button';b.dataset.player=value;b.textContent=value;b.setAttribute('aria-label',`第 ${i+1} 格：${value||'空白'}`);b.addEventListener('click',()=>playTic(i));ticBoard.appendChild(b);});$('#tic-turn').textContent=ticOver?'—':player;}
+function playTic(i){if(cells[i]||ticOver)return;cells[i]=player;const won=wins.some(([a,b,c])=>cells[a]&&cells[a]===cells[b]&&cells[a]===cells[c]);if(won){ticOver=true;$('#tic-status').textContent=`${player} 获胜！`;}else if(cells.every(Boolean)){ticOver=true;$('#tic-status').textContent='平局！';}else{player=player==='X'?'O':'X';$('#tic-status').textContent=`${player} 的回合。`;}renderTic();}
+function resetTic(){cells=Array(9).fill('');player='X';ticOver=false;$('#tic-status').textContent='X 先走。';renderTic();}$('#tic-reset').addEventListener('click',resetTic);resetTic();
 
-document.querySelectorAll('.buy-button').forEach((button) => {
-  button.addEventListener('click', () => {
-    const item = {name: button.dataset.item, price: Number(button.dataset.price)};
-    order.push(item);
-    renderOrder();
-    orderStatus.textContent = `${item.name} added to your order.`;
-    document.querySelector('#order').scrollIntoView({behavior: 'smooth', block: 'center'});
-  });
-});
-
-orderList.addEventListener('click', (event) => {
-  const removeButton = event.target.closest('[data-remove]');
-  if (!removeButton) return;
-  const removed = order.splice(Number(removeButton.dataset.remove), 1)[0];
-  renderOrder();
-  orderStatus.textContent = `${removed.name} removed from your order.`;
-});
-
-clearOrderButton.addEventListener('click', () => {
-  order.length = 0;
-  renderOrder();
-  orderStatus.textContent = 'Your order has been cleared.';
-});
-
-printOrderButton.addEventListener('click', () => {
-  if (order.length === 0) {
-    orderStatus.textContent = 'Add an item before printing your order.';
-    return;
-  }
-  window.print();
-});
-
-renderOrder();
-=======
-const $=selector=>document.querySelector(selector);
-const storageKey='savesprout-data-v1';
-if(new URLSearchParams(location.search).has('fresh'))localStorage.removeItem(storageKey);
-const defaults={name:'',pet:'Pip',goal:0,date:'',saved:0,expenses:[],streak:0,lastVisit:''};
-let data={...defaults,...(JSON.parse(localStorage.getItem(storageKey)||'null')||{})};
-const today=()=>new Date().toISOString().slice(0,10);
-const money=value=>`¥${Math.round(Number(value)||0).toLocaleString('zh-CN')}`;
-const save=()=>localStorage.setItem(storageKey,JSON.stringify(data));
-function updateStreak(){if(data.lastVisit!==today()){const yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10);data.streak=data.lastVisit===yesterday?(data.streak||0)+1:1;data.lastVisit=today();save();}}
-function fillGoalForm(){$('#name-input').value=data.name;$('#pet-input').value=data.pet||'Pip';$('#goal-input').value=data.goal||'';$('#date-input').value=data.date||'';}
-function updatePetMood(percent){$('#pet-mood').textContent=percent>=100?'目标完成啦！':percent>60?'越来越有精神':'等你来喂养';}
-function renderExpenses(){const list=$('#expense-list');if(!data.expenses.length){list.innerHTML='<li class="empty-state">还没有记录，第一笔由你开始。</li>';return;}list.innerHTML=data.expenses.slice(0,5).map((item,index)=>`<li><strong>${item.category}</strong><span>${item.note||'日常消费'}</span><b>-${money(item.amount)}</b><button class="remove-expense" type="button" data-index="${index}" aria-label="删除这条记录">×</button></li>`).join('');document.querySelectorAll('.remove-expense').forEach(button=>button.addEventListener('click',()=>{data.expenses.splice(Number(button.dataset.index),1);save();render();}));}
-function renderChart(){const days=[];for(let i=6;i>=0;i--){const date=new Date(Date.now()-i*86400000).toISOString().slice(0,10);days.push(data.expenses.filter(item=>item.date===date).reduce((sum,item)=>sum+Number(item.amount),0));}const max=Math.max(...days,1);$('#weekly-total').textContent=money(days.reduce((sum,value)=>sum+value,0));$('#bar-chart').innerHTML=days.map((value,index)=>`<span class="bar ${index===6?'active':''}" style="height:${Math.max(8,value/max*100)}%"><small>${value?money(value):''}</small></span>`).join('');}
-function renderInsight(goal,saved,percent){let title='先设定一个目标吧。',detail='有了目标，Pip 才能帮你看见每一步的意义。';if(goal&&percent>=100){title='你把目标养大了！';detail='这份确定感是你自己一点一点存下来的。'}else if(goal&&percent>=60){title='进度很漂亮。';detail=`已经完成 ${percent}%，再坚持一下就能抵达。`}else if(data.expenses.length){title='记录本身就是进步。';detail='看看最近的花费，选择一个今天可以少花的小地方。'}$('#insight-title').textContent=title;$('#insight-detail').textContent=detail;$('#insight-copy').textContent=goal?`已完成 ${percent}%，目标日期 ${data.date||'还未设置'}。`:'每一笔小记录，都会变成一张更清晰的地图。';}
-function render(){const goal=Number(data.goal)||0;const saved=Number(data.saved)||0;const percent=goal?Math.min(100,Math.round(saved/goal*100)):0;$('#profile-label').textContent=data.name||'创建档案';$('#user-name').textContent=data.name||'朋友';$('#pet-name-display').textContent=data.pet||'Pip';$('#pet-greeting').textContent=data.pet?`${data.pet} 在这里。`:'准备好了吗？';$('#pet-message').textContent=saved>0?`${data.pet||'Pip'} 感受到你的坚持了。继续保持！`:'每一次记录，都会让我们的目标更近一点。';$('#goal-amount').textContent=money(goal);$('#saved-amount').textContent=money(saved);$('#remaining-amount').textContent=`还差 ${money(Math.max(0,goal-saved))}`;$('#progress-percent').textContent=`${percent}%`;$('#progress-bar').style.width=`${percent}%`;$('#dashboard-jar-fill').style.height=`${Math.max(8,percent)}%`;$('#hero-jar-fill').style.height=`${Math.max(8,percent)}%`;$('#streak-count').textContent=data.streak||0;$('#expense-total').textContent=`本月 ${money(data.expenses.reduce((sum,item)=>sum+Number(item.amount),0))}`;renderExpenses();renderChart();renderInsight(goal,saved,percent);updatePetMood(percent);fillGoalForm();}
-$('#goal-form').addEventListener('submit',event=>{event.preventDefault();data.name=$('#name-input').value.trim();data.pet=$('#pet-input').value.trim()||'Pip';data.goal=Number($('#goal-input').value)||0;data.date=$('#date-input').value;updateStreak();save();render();$('#dashboard').scrollIntoView({behavior:'smooth'});});
-$('#expense-form').addEventListener('submit',event=>{event.preventDefault();const amount=Number($('#expense-input').value);if(!amount)return;data.expenses.unshift({amount,category:$('#category-input').value,note:$('#note-input').value.trim(),date:today()});updateStreak();save();event.target.reset();render();$('#expense-list').scrollIntoView({behavior:'smooth',block:'center'});});
-$('#savings-form').addEventListener('submit',event=>{event.preventDefault();const amount=Number($('#saving-input').value);if(!amount)return;data.saved+=amount;updateStreak();save();event.target.reset();render();});
-$('#feed-pet').addEventListener('click',()=>{const button=$('#feed-pet');button.innerHTML='Pip 开心地摇尾巴 <span>✦</span>';$('#pet-message').textContent='谢谢你！今天也一起慢慢来。';setTimeout(()=>{button.innerHTML=`给 ${data.pet||'Pip'} 一颗心 <span>♡</span>`;},2200);});
-$('#profile-button').addEventListener('click',()=>{const dialog=$('#profile-dialog');$('#dialog-title').textContent=data.name?`欢迎回来，${data.name}。`:'先创建一个小档案。';if(typeof dialog.showModal==='function')dialog.showModal();else alert('你的资料只保存在当前浏览器。');});
-$('#edit-goal').addEventListener('click',()=>$('#goal').scrollIntoView({behavior:'smooth'}));
-updateStreak();render();
->>>>>>> theirs
+// Dino runner
+const dinoCanvas=$('#dino-canvas'),dinoCtx=dinoCanvas.getContext('2d');let dino={x:75,y:190,w:35,h:38,v:0},obstacle={x:680,w:26,h:48},dinoRunning=false,dinoScore=0,dinoFrame=null;
+function drawDino(){dinoCtx.fillStyle='#ddd4ff';dinoCtx.fillRect(0,0,720,260);dinoCtx.fillStyle='#19233a';dinoCtx.fillRect(0,229,720,3);dinoCtx.fillRect(130,55,80,3);dinoCtx.fillRect(500,90,110,3);dinoCtx.fillStyle='#ff856e';dinoCtx.fillRect(dino.x,dino.y,dino.w,dino.h);dinoCtx.fillRect(dino.x+22,dino.y-12,21,22);dinoCtx.fillStyle='#19233a';dinoCtx.fillRect(dino.x+36,dino.y-5,4,4);dinoCtx.fillRect(obstacle.x,229-obstacle.h,obstacle.w,obstacle.h);dinoCtx.fillRect(obstacle.x-9,229-obstacle.h+17,9,6);dinoCtx.fillRect(obstacle.x+obstacle.w,229-obstacle.h+28,9,6);}
+function resetDino(){cancelAnimationFrame(dinoFrame);dinoRunning=false;dinoScore=0;$('#dino-score').textContent='0';$('#dino-status').textContent='准备起跑。';dino={x:75,y:190,w:35,h:38,v:0};obstacle={x:680,w:26,h:48};drawDino();}
+function jump(){if(!dinoRunning)startDino();if(dino.y>=190)dino.v=-13;}
+function runDino(){if(!dinoRunning)return;dino.v+=.65;dino.y+=dino.v;if(dino.y>190){dino.y=190;dino.v=0;}obstacle.x-=5;if(obstacle.x<-35){obstacle.x=720+Math.random()*160;dinoScore++;$('#dino-score').textContent=dinoScore;}const hit=dino.x<obstacle.x+obstacle.w&&dino.x+dino.w>obstacle.x&&dino.y+dino.h>229-obstacle.h;if(hit){dinoRunning=false;$('#dino-status').textContent=`撞到了！距离 ${dinoScore}。`;drawDino();return;}drawDino();dinoFrame=requestAnimationFrame(runDino);}
+function startDino(){resetDino();dinoRunning=true;$('#dino-status').textContent='跑起来了！';dinoFrame=requestAnimationFrame(runDino);}$('#dino-start').addEventListener('click',startDino);$('#dino-jump').addEventListener('click',jump);dinoCanvas.addEventListener('click',jump);document.addEventListener('keydown',e=>{if(e.key===' '||e.key==='ArrowUp'){e.preventDefault();jump();}});resetDino();
